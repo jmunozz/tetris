@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { DRAW_PIECE, ERASE_PIECE } from './actions.js'
+import { DRAW_PIECE, ERASE_PIECE, SET_PIECE, TOGGLE_PLAY } from './actions.js'
 import { widthSize, heightSize } from '../constants.js'
 import { forEachBlockInPiece, isPiecePlacable, copyGrid } from '../helpers.js'
 
@@ -49,8 +49,6 @@ function erasePiece(grid, piece) {
 ** Reducer for grid-related operations.
 */
 function grid(state = initGrid(), action) {
-  console.log("ici")
-  console.log(state);
   switch(action.type) {
     case DRAW_PIECE:
       return drawPiece(state, action.piece);
@@ -62,10 +60,39 @@ function grid(state = initGrid(), action) {
 }
 
 /*
+** Reducer for manipulating currentPiece
+*/
+
+function currentPiece(state = null, action) {
+  switch (action.type) {
+    case SET_PIECE:
+      return Object.assign({}, action.piece);
+    default:
+      return state;
+  }
+}
+
+/*
+** Reducer for on/off mode
+*/ 
+
+function isPlaying(state = false, action) {
+  switch (action.type) {
+    case TOGGLE_PLAY:
+      return !state;
+    default:
+      return state;
+  }
+}
+
+
+/*
 ** Full app reducer.
 */
 const tetrisTree = combineReducers({
   grid,
+  currentPiece,
+  isPlaying,
 });
 
 export default tetrisTree;
