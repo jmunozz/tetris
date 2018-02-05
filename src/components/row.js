@@ -1,11 +1,15 @@
+import React from 'react';
 import Cell from './cell.js';
 
 
-const Row = (row) => {
+const Row = ({row}) => {
 
-  return <div> {
+  const rowStyle = {
+    display:"flex"
+  }
+  return <div style={rowStyle}> {
     row.map((e) => {
-      return <div cell={e}></div>
+      return <Cell cell={e}></Cell>
     })
   }</div>
 }

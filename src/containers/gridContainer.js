@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import grid from '../components/grid.js';
+import Grid from '../components/grid.js';
 
 const mapStateToProps = (state) => {
   return {
@@ -9,6 +9,6 @@ const mapStateToProps = (state) => {
 
 const GridContainer = connect(
   mapStateToProps,
-)(grid);
+)(Grid);
 
 export default GridContainer;

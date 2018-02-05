@@ -1,5 +1,5 @@
-export DRAW_PIECE = 'DRAW_PIECE';
-export ERASE_PIECE = 'ERASE_PIECE';
+export const DRAW_PIECE = 'DRAW_PIECE';
+export const ERASE_PIECE = 'ERASE_PIECE';
 
 export function drawPiece(x, y, t, dir) {
   return { type: DRAW_PIECE, piece: { x, y, t, dir } };

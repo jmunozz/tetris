@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Cell = (cell) => {
 
   const {empty} = cell;

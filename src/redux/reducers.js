@@ -7,11 +7,11 @@ import { forEachBlockInPiece, isPiecePlacable, copyGrid } from '../helpers.js'
 /*
 ** Init array of arrays with all cells as objects.
 */
-function initGrid(size) {
+function initGrid() {
   const grid = [];
-  for (let i = 0; i < widthSize; i++) {
+  for (let i = 0; i < heightSize; i++) {
     const row = [];
-    for (let j = 0; j < heightSize; j++) {
+    for (let j = 0; j < widthSize; j++) {
       row.push({
         fill: false,
       })
@@ -49,6 +49,8 @@ function erasePiece(grid, piece) {
 ** Reducer for grid-related operations.
 */
 function grid(state = initGrid(), action) {
+  console.log("ici")
+  console.log(state);
   switch(action.type) {
     case DRAW_PIECE:
       return drawPiece(state, action.piece);
