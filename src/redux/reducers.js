@@ -48,12 +48,14 @@ function erasePiece(grid, piece) {
 /*
 ** Reducer for grid-related operations.
 */
-function grid(state = initGrid(), action) {
+function grid(state = {grid: initGrid(), currentPiece:null}, action) {
   switch(action.type) {
     case DRAW_PIECE:
       return drawPiece(state, action.piece);
     case ERASE_PIECE:
       return erasePiece(state, action.piece);
+    case SET_PIECE:
+      return {}
     default:
       return state;
   }
@@ -65,7 +67,6 @@ function grid(state = initGrid(), action) {
 
 function currentPiece(state = null, action) {
   switch (action.type) {
-    case SET_PIECE:
       return Object.assign({}, action.piece);
     default:
       return state;
@@ -91,7 +92,6 @@ function isPlaying(state = false, action) {
 */
 const tetrisTree = combineReducers({
   grid,
-  currentPiece,
   isPlaying,
 });
 

@@ -13,7 +13,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     start: () => {
       dispatch(togglePlay());
-      dispatch(setPiece(pieces.i));
+      dispatch(setPiece({
+        x:0, 
+        y:0,
+        t:pieces.i,
+        dir:0,
+      }));
     }
   }
 }
