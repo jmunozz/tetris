@@ -8,8 +8,8 @@ const Row = ({row}) => {
     display:"flex"
   }
   return <div style={rowStyle}> {
-    row.map((e) => {
-      return <Cell cell={e}></Cell>
+    row.map((e, i) => {
+      return <Cell key={i} fill={e.fill}></Cell>
     })
   }</div>
 }

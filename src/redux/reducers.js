@@ -51,23 +51,11 @@ function erasePiece(grid, piece) {
 function grid(state = {grid: initGrid(), currentPiece:null}, action) {
   switch(action.type) {
     case DRAW_PIECE:
-      return drawPiece(state, action.piece);
+      return { grid: drawPiece(state.grid, state.currentPiece), currentPiece: state.currentPiece};
     case ERASE_PIECE:
-      return erasePiece(state, action.piece);
+      return { grid: erasePiece(state.grid, state.currentPiece), currentPiece: state.currentPiece};
     case SET_PIECE:
-      return {}
-    default:
-      return state;
-  }
-}
-
-/*
-** Reducer for manipulating currentPiece
-*/
-
-function currentPiece(state = null, action) {
-  switch (action.type) {
-      return Object.assign({}, action.piece);
+      return {grid: state.grid, currentPiece: action.piece};
     default:
       return state;
   }

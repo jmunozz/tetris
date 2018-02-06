@@ -3,12 +3,12 @@ export const ERASE_PIECE = 'ERASE_PIECE';
 export const SET_PIECE = 'SET_PIECE';
 export const TOGGLE_PLAY = 'TOGGLE_PLAY';
 
-export function drawPiece(x, y, t, dir) {
-  return { type: DRAW_PIECE, piece: { x, y, t, dir } };
+export function drawPiece() {
+  return { type: DRAW_PIECE };
 }
 
-export function erasePiece(x, y, t, dir) {
-  return { type: ERASE_PIECE, piece: { x, y, t, dir } };
+export function erasePiece() {
+  return { type: ERASE_PIECE };
 }
 
 export function setPiece(piece) {

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 import { pieces } from '../constants.js';
-import { togglePlay, setPiece } from '../redux/actions.js';
+import { togglePlay, setPiece, drawPiece } from '../redux/actions.js';
 
 
 let StartDisplay = ({start}) => {

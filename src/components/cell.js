@@ -2,7 +2,8 @@ import React from 'react';
 
 const Cell = (cell) => {
 
-  const {empty} = cell;
+  
+  const {fill} = cell;
   const cellStyle = {
     border: "solid gray 1px",
     width: "20px",
@@ -12,7 +13,7 @@ const Cell = (cell) => {
     margin: "0",
   };
 
-  if (empty) { 
+  if (fill) { 
     cellStyle.backgroundColor = "LightSkyBlue"; 
     cellStyle.border = "4px solid aqua"; 
     cellStyle.borderBottom = "4px solid DarkCyan "; 

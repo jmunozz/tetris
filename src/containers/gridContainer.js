@@ -3,7 +3,7 @@ import Grid from '../components/grid.js';
 
 const mapStateToProps = (state) => {
   return {
-    grid: state.grid,
+    grid: state.grid.grid,
     isPlaying: state.isPlaying,
   }
 }
