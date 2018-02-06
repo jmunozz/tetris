@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { DRAW_PIECE, ERASE_PIECE, SET_PIECE, TOGGLE_PLAY, SET_NEW_PIECE} from './actions.js'
+import { DRAW_PIECE, ERASE_PIECE, SET_PIECE, TOGGLE_PLAY, SET_NEW_PIECE, REFRESH_GRID_WITHOUT_CURRENT} from './actions.js'
 import { forEachBlockInPiece, isPiecePlacable, copyGrid } from '../helpers.js'
 import initTetris from './init.js';
 import { initBag } from './init.js';
@@ -10,7 +10,6 @@ import { initBag } from './init.js';
 */
 function drawPiece(state) {
 
-  console.log(state);
   const grid = state.grid;
   const currentPiece = state.currentPiece;
 
@@ -42,7 +41,7 @@ function erasePiece(state) {
 ** Return entire state with new current piece.
 */
 function setPiece(state, piece) {
-  return Object.assign({}, state, {currentPiece: piece});
+  return Object.assign(state, {currentPiece: piece});
 }
 
 /*
@@ -59,9 +58,15 @@ function setNewPiece(state) {
     y: 0,
   };
   const nextBag = sliceBagFromIndex(currentBag, indexPiece);
-  return Object.assign(state, {currentPiece: piece, bag: nextBag});
+  return Object.assign(state, { currentPiece: piece, bag: nextBag });
 }
 
+/*
+** Return entire state with new grid without current piece
+*/
+function refreshGridWithoutCurrent(state) {
+  return Object.assign(state, { gridWithoutCurrent: copyGrid(state.grid) });
+}
 
 /*
 ** Reducer for tetris-related operations.
@@ -76,6 +81,8 @@ function tetris(state = initTetris(), action) {
       return setPiece(state, action.piece);
     case SET_NEW_PIECE: 
       return setNewPiece(state);
+    case REFRESH_GRID_WITHOUT_CURRENT:
+      return refreshGridWithoutCurrent(state);
     default:
       return state;
   }

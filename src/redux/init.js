@@ -34,7 +34,9 @@ function initBag() {
 ** Init all tetris variables
 */
 export default function getNewTetris() {
+
   return {
+    gridWithoutCurrent: initGrid(),
     grid: initGrid(),
     currentPiece: null,
     bag: initBag(),

@@ -23,6 +23,9 @@ export function forEachBlockInPiece({x, y, t, dir}, func) {
 ** Tells if we can draw a piece.
 */
 export function isPiecePlacable(piece, grid) {
+  console.log("IsPiecePlacable");
+  console.log(piece);
+  console.log(grid);
   let result = true;
   forEachBlockInPiece(piece, (x, y) => {
     if (!result || !grid[x] || !grid[x][y] || grid[x][y].fill === true) 
@@ -37,7 +40,7 @@ export function isPiecePlacable(piece, grid) {
 export function copyGrid(grid) {
   return grid.map(row => {
     return row.map(cell => {
-      return cell;
+      return {...cell};
     })
   })
 }
