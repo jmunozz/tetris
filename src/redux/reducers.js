@@ -1,61 +1,81 @@
 import { combineReducers } from 'redux'
-import { DRAW_PIECE, ERASE_PIECE, SET_PIECE, TOGGLE_PLAY } from './actions.js'
-import { widthSize, heightSize } from '../constants.js'
+import { DRAW_PIECE, ERASE_PIECE, SET_PIECE, TOGGLE_PLAY, SET_NEW_PIECE} from './actions.js'
 import { forEachBlockInPiece, isPiecePlacable, copyGrid } from '../helpers.js'
+import initTetris from './init.js';
+import { initBag } from './init.js';
 
 
 /*
-** Init array of arrays with all cells as objects.
+** Return entire state with new grid.
 */
-function initGrid() {
-  const grid = [];
-  for (let i = 0; i < heightSize; i++) {
-    const row = [];
-    for (let j = 0; j < widthSize; j++) {
-      row.push({
-        fill: false,
-      })
-    }
-    grid.push(row);
-  }
-  return grid
-}
+function drawPiece(state) {
 
-/*
-** Return new grid with modified cells
-*/
-function drawPiece(grid, piece) {
+  console.log(state);
+  const grid = state.grid;
+  const currentPiece = state.currentPiece;
+
   const gridCopy = copyGrid(grid);
-  forEachBlockInPiece(piece, (x, y) => {
+  forEachBlockInPiece(currentPiece, (x, y) => {
     let cell = gridCopy[x][y];
     cell.fill = true;
   });
-  return gridCopy;
+  return Object.assign({}, state, { grid: gridCopy });
 }
 
 /*
-** Return new grid with modified cells
+** Return entire state with new grid.
 */
-function erasePiece(grid, piece) {
+function erasePiece(state) {
+
+  const grid = state.grid;
+  const currentPiece = state.currentPiece;
+
   const gridCopy = copyGrid(grid);
-  forEachBlockInPiece(piece, (x, y) => {
+  forEachBlockInPiece(currentPiece, (x, y) => {
     let cell = gridCopy[x][y];
     cell.fill = false;
   });
-  return gridCopy;
+  return Object.assign({}, state, { grid: gridCopy });
 }
 
 /*
-** Reducer for grid-related operations.
+** Return entire state with new current piece.
 */
-function grid(state = {grid: initGrid(), currentPiece:null}, action) {
+function setPiece(state, piece) {
+  return Object.assign({}, state, {currentPiece: piece});
+}
+
+/*
+** Return entire state with new current piece got from bag and new bag.
+*/
+function setNewPiece(state) {
+
+  const currentBag = (state.bag.length) ? state.bag : initBag();
+  const indexPiece = getRandomPieceFromBag(currentBag);
+  const piece = {
+    t: currentBag[indexPiece],
+    dir: 0,
+    x: 0,
+    y: 0,
+  };
+  const nextBag = sliceBagFromIndex(currentBag, indexPiece);
+  return Object.assign(state, {currentPiece: piece, bag: nextBag});
+}
+
+
+/*
+** Reducer for tetris-related operations.
+*/
+function tetris(state = initTetris(), action) {
   switch(action.type) {
     case DRAW_PIECE:
-      return { grid: drawPiece(state.grid, state.currentPiece), currentPiece: state.currentPiece};
+      return drawPiece(state);
     case ERASE_PIECE:
-      return { grid: erasePiece(state.grid, state.currentPiece), currentPiece: state.currentPiece};
+      return erasePiece(state);
     case SET_PIECE:
-      return {grid: state.grid, currentPiece: action.piece};
+      return setPiece(state, action.piece);
+    case SET_NEW_PIECE: 
+      return setNewPiece(state);
     default:
       return state;
   }
@@ -75,13 +95,24 @@ function isPlaying(state = false, action) {
 }
 
 
+
 /*
 ** Full app reducer.
 */
 const tetrisTree = combineReducers({
-  grid,
+  tetris,
   isPlaying,
 });
 
 export default tetrisTree;
 
+
+
+function getRandomPieceFromBag(bag) {
+  return Math.floor(Math.random() * bag.length); 
+}
+
+function sliceBagFromIndex(bag, index) {
+  if (bag.length === 1) return [];
+  return [...bag.slice(0, index), ...bag.slice(index + 1)];
+}

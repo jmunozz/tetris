@@ -3,7 +3,8 @@ import Grid from '../components/grid.js';
 
 const mapStateToProps = (state) => {
   return {
-    grid: state.grid.grid,
+    grid: state.tetris.grid,
+    currentPiece: state.tetris.currentPiece,
     isPlaying: state.isPlaying,
   }
 }

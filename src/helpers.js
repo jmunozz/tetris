@@ -1,4 +1,4 @@
-import store from './redux/store.js'
+import { setPiece, drawPiece, erasePiece } from './redux/actions.js';
 
 
 /*
@@ -8,7 +8,7 @@ export function forEachBlockInPiece({x, y, t, dir}, func) {
   let row = 0;
   let column = 0;
   const piece = t.blocks[dir];
-  for (let bin = 0x800; bin > 0; bin >>= 1) {
+  for (let bin = 0x8000; bin > 0; bin >>= 1) {
     if (bin & piece) {
       func(x + column, y + row);
     }
@@ -22,8 +22,7 @@ export function forEachBlockInPiece({x, y, t, dir}, func) {
 /*
 ** Tells if we can draw a piece.
 */
-export function isPiecePlacable(piece) {
-  const { grid } = store.getState();
+export function isPiecePlacable(piece, grid) {
   let result = true;
   forEachBlockInPiece(piece, (x, y) => {
     if (!result || !grid[x] || !grid[x][y] || grid[x][y].fill === true) 

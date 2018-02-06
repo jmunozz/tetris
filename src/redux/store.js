@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import tetrisTree from './reducers';
+import thunk from 'redux-thunk';
 
 
 
@@ -19,6 +20,6 @@ const logger = store => next => action => {
 
 let store = createStore(
   tetrisTree,
-  applyMiddleware(logger)
+  applyMiddleware(thunk, logger),
 );
 export default store;
