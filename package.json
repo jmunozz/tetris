@@ -3,10 +3,11 @@
   "description": null,
   "version": "0.0.28",
   "dependencies": {
-    "redux": "3.7.2",
-    "react-redux": "latest",
+    "react": "16.0.0",
     "react-dom": "16.0.0",
-    "react": "16.0.0"
+    "react-redux": "latest",
+    "redux": "3.7.2",
+    "redux-thunk": "2.2.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.0"
