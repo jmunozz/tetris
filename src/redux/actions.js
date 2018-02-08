@@ -121,6 +121,7 @@ function tetris(dispatch, getState) {
 */
 export function movePieceLeft() {
   return (dispatch, getState) => {
+    console.log("logPieceLeft");
     const state = getState();
     const currentPiece = state.tetris.currentPiece;
     const gridWithoutCurrent = state.tetris.gridWithoutCurrent;
@@ -140,7 +141,7 @@ export function movePieceLeft() {
 */
 export function movePieceRight() {
   return (dispatch, getState) => {
-    console.log("lovePieceRight");
+    console.log("logPieceRight");
     const state = getState();
     const currentPiece = state.tetris.currentPiece;
     const gridWithoutCurrent = state.tetris.gridWithoutCurrent;
@@ -166,6 +167,25 @@ export function rotatePiece() {
     const nextPiece = {
       ...currentPiece,
       ...{ dir: currentPiece.dir === 3 ? 0 : currentPiece.dir + 1 }
+    };
+
+    // Enough space to place piece.
+    if (isPiecePlacable(nextPiece, gridWithoutCurrent)) {
+      dispatch(erasePiece());
+      dispatch(setPiece(nextPiece));
+      dispatch(drawPiece());
+    }
+  };
+}
+
+export function moveDown() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const currentPiece = state.tetris.currentPiece;
+    const gridWithoutCurrent = state.tetris.gridWithoutCurrent;
+    const nextPiece = {
+      ...currentPiece,
+      ...{ x: currentPiece.x + 1 }
     };
 
     // Enough space to place piece.

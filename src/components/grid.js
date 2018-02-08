@@ -22,10 +22,16 @@ const Grid = ({
     switch (e.keyCode) {
       case keys.LEFT:
         movePieceLeft();
+        break;
       case keys.RIGHT:
         movePieceRight();
-      case keys.TOP:
+        break;
+      case keys.UP:
         rotatePiece();
+        break;
+      case keys.DOWN:
+        rotatePiece();
+        break;
     }
   };
 

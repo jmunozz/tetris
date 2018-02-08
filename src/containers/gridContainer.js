@@ -2,7 +2,8 @@ import { connect } from "react-redux";
 import {
   movePieceLeft,
   movePieceRight,
-  rotatePiece
+  rotatePiece,
+  movePieceDown
 } from "../redux/actions.js";
 import Grid from "../components/grid.js";
 
@@ -24,6 +25,9 @@ const mapDispatchToProps = dispatch => {
     },
     rotatePiece: () => {
       dispatch(rotatePiece());
+    },
+    movePieceDown: () => {
+      dispatch(movePieceDown());
     }
   };
 };
