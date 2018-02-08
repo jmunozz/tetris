@@ -1,26 +1,21 @@
-import React from 'react';
+import React from "react";
 
-const Cell = (cell) => {
-
-  
-  const {fill} = cell;
+const Cell = cell => {
+  const { fill, color } = cell;
   const cellStyle = {
     border: "solid gray 1px",
     width: "20px",
     height: "20px",
     display: "flex",
     borderRadius: "0",
-    margin: "0",
+    margin: "0"
   };
 
-  if (fill) { 
-    cellStyle.backgroundColor = "LightSkyBlue"; 
-    cellStyle.border = "4px solid aqua"; 
-    cellStyle.borderBottom = "4px solid DarkCyan "; 
-    cellStyle.borderLeft = "4px solid DarkCyan";
+  if (fill) {
+    cellStyle.backgroundColor = color;
   }
 
-  return <div style={cellStyle}></div>
-}
+  return <div style={cellStyle} />;
+};
 
 export default Cell;

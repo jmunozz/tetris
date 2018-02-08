@@ -1,16 +1,33 @@
-import { connect } from 'react-redux';
-import Grid from '../components/grid.js';
+import { connect } from "react-redux";
+import {
+  movePieceLeft,
+  movePieceRight,
+  rotatePiece
+} from "../redux/actions.js";
+import Grid from "../components/grid.js";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     grid: state.tetris.grid,
     currentPiece: state.tetris.currentPiece,
-    isPlaying: state.isPlaying,
-  }
-}
+    isPlaying: state.isPlaying
+  };
+};
 
-const GridContainer = connect(
-  mapStateToProps,
-)(Grid);
+const mapDispatchToProps = dispatch => {
+  return {
+    movePieceLeft: () => {
+      dispatch(movePieceLeft());
+    },
+    movePieceRight: () => {
+      dispatch(movePieceRight());
+    },
+    rotatePiece: () => {
+      dispatch(rotatePiece());
+    }
+  };
+};
+
+const GridContainer = connect(mapStateToProps, mapDispatchToProps)(Grid);
 
 export default GridContainer;

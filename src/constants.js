@@ -1,16 +1,21 @@
-
 // Size of grid
 export const heightSize = 10;
 export const widthSize = heightSize / 3 * 2;
 
-
 // All pieces
 export const pieces = {
-  i: { blocks: [0x0F00, 0x2222, 0x00F0, 0x4444], color: 'cyan' },
-  j: { blocks: [0x44C0, 0x8E00, 0x6440, 0x0E20], color: 'blue' },
-  l: { blocks: [0x4460, 0x0E80, 0xC440, 0x2E00], color: 'orange' },
-  o: { blocks: [0xCC00, 0xCC00, 0xCC00, 0xCC00], color: 'yellow' },
-  s: { blocks: [0x06C0, 0x8C40, 0x6C00, 0x4620], color: 'green' },
-  t: { blocks: [0x0E40, 0x4C40, 0x4E00, 0x4640], color: 'purple' },
-  z: { blocks: [0x0C60, 0x4C80, 0xC600, 0x2640], color: 'red' },
-}
+  i: { blocks: [0x0f00, 0x2222, 0x00f0, 0x4444], color: "cyan" },
+  j: { blocks: [0x44c0, 0x8e00, 0x6440, 0x0e20], color: "blue" },
+  l: { blocks: [0x4460, 0x0e80, 0xc440, 0x2e00], color: "orange" },
+  o: { blocks: [0xcc00, 0xcc00, 0xcc00, 0xcc00], color: "yellow" },
+  s: { blocks: [0x06c0, 0x8c40, 0x6c00, 0x4620], color: "green" },
+  t: { blocks: [0x0e40, 0x4c40, 0x4e00, 0x4640], color: "purple" },
+  z: { blocks: [0x0c60, 0x4c80, 0xc600, 0x2640], color: "red" }
+};
+
+export const keys = {
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40
+};
